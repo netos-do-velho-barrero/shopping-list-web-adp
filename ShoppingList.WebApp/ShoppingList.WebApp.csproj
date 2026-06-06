@@ -6,4 +6,46 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Remove="ModuloProduto\Apresentacao\Views\Cadastrar.cshtml" />
+    <Content Remove="ModuloProduto\Apresentacao\Views\Editar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="ModuloProduto\Apresentacao\Views\Cadastrar.cshtml" />
+    <Compile Include="ModuloProduto\Apresentacao\Views\Editar.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Compartilhado\" />
+    <Folder Include="Compartilhado\Aplicacao\" />
+    <Folder Include="Compartilhado\Apresentacao\" />
+    <Folder Include="Compartilhado\Apresentacao\Extensions\" />
+    <Folder Include="Compartilhado\Apresentacao\Views\" />
+    <Folder Include="Compartilhado\Dominio\" />
+    <Folder Include="Compartilhado\Infra\" />
+    <Folder Include="Compartilhado\Infra\Arquivos\" />
+    <Folder Include="ModuloCategoria\" />
+    <Folder Include="ModuloCategoria\Aplicacao\" />
+    <Folder Include="ModuloCategoria\Apresentacao\" />
+    <Folder Include="ModuloCategoria\Apresentacao\Views\" />
+    <Folder Include="ModuloCategoria\Dominio\" />
+    <Folder Include="ModuloCategoria\Infra\" />
+    <Folder Include="ModuloItemLista\Aplicacao\" />
+    <Folder Include="ModuloItemLista\Apresentacao\" />
+    <Folder Include="ModuloItemLista\Apresentacao\Views\" />
+    <Folder Include="ModuloItemLista\Dominio\" />
+    <Folder Include="ModuloItemLista\Infra\" />
+    <Folder Include="ModuloListaCompra\" />
+    <Folder Include="ModuloListaCompra\Aplicacao\" />
+    <Folder Include="ModuloListaCompra\Apresentacao\" />
+    <Folder Include="ModuloListaCompra\Apresentacao\Views\" />
+    <Folder Include="ModuloListaCompra\Dominio\" />
+    <Folder Include="ModuloListaCompra\Infra\" />
+    <Folder Include="ModuloProduto\Aplicacao\" />
+    <Folder Include="ModuloProduto\Dominio\" />
+    <Folder Include="ModuloProduto\Infra\" />
+    <Folder Include="ModuloItemLista\" />
+  </ItemGroup>
+
 </Project>
