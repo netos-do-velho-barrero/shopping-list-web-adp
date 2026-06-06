@@ -1,8 +1,14 @@
-using System;
+namespace ListaDeComprasWeb.WebApp.ModuloProduto.Dominio;
 
-namespace ShoppingList.WebApp.ModuloProduto.Dominio;
-
-public class UnidadeMedida
+public enum UnidadeMedida
 {
-
+    Unidade,
+    Quilograma,
+    Grama,
+    Litro,
+    Mililitro,
+    Caixa,
+    Pacote,
+    Lata,
+    Garrafa
 }

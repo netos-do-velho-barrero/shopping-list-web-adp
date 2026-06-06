@@ -1,8 +1,5 @@
-using System;
+using ListaDeComprasWeb.WebApp.Compartilhado.Dominio;
 
-namespace ShoppingList.WebApp.ModuloCategoria.Dominio;
+namespace ListaDeComprasWeb.WebApp.ModuloCategoria.Dominio;
 
-public interface IRepositorioCategoria
-{
-
-}
+public interface IRepositorioCategoria : IRepositorio<Categoria>;
