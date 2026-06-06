@@ -1,8 +1,22 @@
-using System;
+using AutoMapper;
+using ListaDeComprasWeb.WebApp.ModuloListaCompra.Aplicacao;
 
-namespace ShoppingList.WebApp.ModuloListaCompra.Apresentacao;
+namespace ListaDeComprasWeb.WebApp.ModuloListaCompra.Apresentacao;
 
-public class ListaCompraProfile
+public class ListaCompraProfile : Profile
 {
+    public ListaCompraProfile()
+    {
+        CreateMap<CadastrarListaCompraViewModel, CadastrarListaCompraDto>();
 
+        CreateMap<EditarListaCompraViewModel, EditarListaCompraDto>();
+
+        CreateMap<ListarListasCompraDto, ListarListasCompraViewModel>();
+
+        CreateMap<DetalhesListaCompraDto, EditarListaCompraViewModel>();
+
+        CreateMap<DetalhesListaCompraDto, ExcluirListaCompraViewModel>();
+
+        CreateMap<DetalhesListaCompraDto, DetalhesListaCompraViewModel>();
+    }
 }

@@ -1,8 +1,29 @@
-using System;
+using ListaDeComprasWeb.WebApp.ModuloListaCompra.Dominio;
 
-namespace ShoppingList.WebApp.ModuloListaCompra.Aplicacao;
+namespace ListaDeComprasWeb.WebApp.ModuloListaCompra.Aplicacao;
 
-public class ListaCompraDtos
-{
+public record CadastrarListaCompraDto(string Nome);
 
-}
+public record EditarListaCompraDto(
+    string Id,
+    string Nome,
+    StatusListaCompra Status
+);
+
+public record ListarListasCompraDto(
+    string Id,
+    string Nome,
+    DateTime DataCriacao,
+    StatusListaCompra Status,
+    int TotalItens,
+    decimal ValorTotalEstimado
+);
+
+public record DetalhesListaCompraDto(
+    string Id,
+    string Nome,
+    DateTime DataCriacao,
+    StatusListaCompra Status,
+    int TotalItens,
+    decimal ValorTotalEstimado
+);

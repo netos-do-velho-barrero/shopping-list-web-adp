@@ -1,8 +1,5 @@
-using System;
+using ListaDeComprasWeb.WebApp.Compartilhado.Dominio;
 
-namespace ShoppingList.WebApp.ModuloListaCompra.Dominio;
+namespace ListaDeComprasWeb.WebApp.ModuloListaCompra.Dominio;
 
-public interface IRepositorioListaCompra
-{
-
-}
+public interface IRepositorioListaCompra : IRepositorio<ListaCompra>;

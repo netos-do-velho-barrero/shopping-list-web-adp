@@ -7,13 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="ModuloProduto\Apresentacao\Views\Cadastrar.cshtml" />
-    <Content Remove="ModuloProduto\Apresentacao\Views\Editar.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Include="ModuloProduto\Apresentacao\Views\Cadastrar.cshtml" />
-    <Compile Include="ModuloProduto\Apresentacao\Views\Editar.cshtml" />
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="FluentResults" Version="4.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,7 +41,6 @@
     <Folder Include="ModuloProduto\Aplicacao\" />
     <Folder Include="ModuloProduto\Dominio\" />
     <Folder Include="ModuloProduto\Infra\" />
-    <Folder Include="ModuloItemLista\" />
   </ItemGroup>
 
 </Project>

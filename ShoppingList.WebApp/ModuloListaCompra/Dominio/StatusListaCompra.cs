@@ -1,8 +1,7 @@
-using System;
+namespace ListaDeComprasWeb.WebApp.ModuloListaCompra.Dominio;
 
-namespace ShoppingList.WebApp.ModuloListaCompra.Dominio;
-
-public class StatusListaCompra
+public enum StatusListaCompra
 {
-
+    Aberta,
+    Concluida
 }

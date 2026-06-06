@@ -1,4 +1,4 @@
-// using FluentResults;
+using FluentResults;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace ListaDeComprasWeb.WebApp.Compartilhado.Apresentacao.Extensions;
@@ -9,9 +9,10 @@ public static class ModelStateExtensions
     {
         foreach (IError erro in result.Errors)
         {
-            string campo = erro.Metadata["Campo"] is string
-                ? erro.Metadata["Campo"].ToString()!
-                : string.Empty;
+            string campo = string.Empty;
+
+            if (erro.Metadata.TryGetValue("Campo", out object? valorCampo) && valorCampo is string nomeCampo)
+                campo = nomeCampo;
 
             modelState.AddModelError(campo, erro.Message);
         }
