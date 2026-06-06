@@ -1,5 +1,61 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<ListarListasCompraViewModel>
+
 @{
+    ViewBag.Titulo = "Listas de Compras";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Listas cadastradas</h3>
+
+    <a class="btn btn-primary" asp-action="Cadastrar">
+        Nova lista
+    </a>
+</div>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-info">
+        Nenhuma lista de compras cadastrada.
+    </div>
+}
+else
+{
+    <table class="table table-striped table-hover align-middle">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Data de criação</th>
+                <th>Status</th>
+                <th>Total de itens</th>
+                <th>Total estimado</th>
+                <th class="text-end">Ações</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (ListarListasCompraViewModel lista in Model)
+            {
+                <tr>
+                    <td>@lista.Nome</td>
+                    <td>@lista.DataCriacao.ToString("dd/MM/yyyy HH:mm")</td>
+                    <td>@lista.Status</td>
+                    <td>@lista.TotalItens</td>
+                    <td>@lista.ValorTotalEstimado.ToString("C")</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-secondary" asp-action="Detalhes" asp-route-id="@lista.Id">
+                            Detalhes
+                        </a>
+
+                        <a class="btn btn-sm btn-outline-primary" asp-action="Editar" asp-route-id="@lista.Id">
+                            Editar
+                        </a>
+
+                        <a class="btn btn-sm btn-outline-danger" asp-action="Excluir" asp-route-id="@lista.Id">
+                            Excluir
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }

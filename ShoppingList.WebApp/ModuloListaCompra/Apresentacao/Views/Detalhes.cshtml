@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model DetalhesListaCompraViewModel
+
 @{
+    ViewBag.Titulo = "Detalhes da Lista de Compras";
 }
+
+<dl class="row">
+    <dt class="col-sm-3">Nome</dt>
+    <dd class="col-sm-9">@Model.Nome</dd>
+
+    <dt class="col-sm-3">Data de criação</dt>
+    <dd class="col-sm-9">@Model.DataCriacao.ToString("dd/MM/yyyy HH:mm")</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">@Model.Status</dd>
+
+    <dt class="col-sm-3">Total de itens</dt>
+    <dd class="col-sm-9">@Model.TotalItens</dd>
+
+    <dt class="col-sm-3">Total estimado</dt>
+    <dd class="col-sm-9">@Model.ValorTotalEstimado.ToString("C")</dd>
+</dl>
+
+<div class="d-flex gap-2">
+    <a class="btn btn-outline-primary" asp-action="Editar" asp-route-id="@Model.Id">
+        Editar
+    </a>
+
+    <a class="btn btn-outline-danger" asp-action="Excluir" asp-route-id="@Model.Id">
+        Excluir
+    </a>
+
+    <a class="btn btn-outline-secondary" asp-action="Listar">
+        Voltar
+    </a>
+</div>
