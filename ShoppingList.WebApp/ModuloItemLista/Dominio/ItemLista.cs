@@ -12,8 +12,6 @@ public sealed class ItemLista : EntidadeBase<ItemLista>
 
     public decimal Quantidade { get; set; }
 
-    public bool FoiComprado { get; set; }
-
     public ItemLista() { }
 
     public ItemLista(ListaCompra listaCompra, Produto produto, decimal quantidade)
@@ -21,7 +19,6 @@ public sealed class ItemLista : EntidadeBase<ItemLista>
         ListaCompra = listaCompra;
         Produto = produto;
         Quantidade = quantidade;
-        FoiComprado = false;
     }
 
     public decimal CalcularValorTotal()
@@ -29,7 +26,7 @@ public sealed class ItemLista : EntidadeBase<ItemLista>
         if (Produto == null)
             return 0;
 
-        return Quantidade * Produto.PrecoAproximado;
+        return Produto.PrecoAproximado * Quantidade;
     }
 
     public override List<string> Validar()
@@ -37,7 +34,7 @@ public sealed class ItemLista : EntidadeBase<ItemLista>
         List<string> erros = new List<string>();
 
         if (ListaCompra == null)
-            erros.Add("O campo \"Lista de Compra\" deve ser preenchido.");
+            erros.Add("O campo \"Lista de Compras\" deve ser preenchido.");
 
         if (Produto == null)
             erros.Add("O campo \"Produto\" deve ser preenchido.");
@@ -53,6 +50,5 @@ public sealed class ItemLista : EntidadeBase<ItemLista>
         ListaCompra = entidadeAtualizada.ListaCompra;
         Produto = entidadeAtualizada.Produto;
         Quantidade = entidadeAtualizada.Quantidade;
-        FoiComprado = entidadeAtualizada.FoiComprado;
     }
 }

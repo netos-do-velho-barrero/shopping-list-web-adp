@@ -1,5 +1,48 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CadastrarItemListaViewModel
+
 @{
+    DadosCadastroItemListaViewModel dados = ViewBag.DadosCadastro;
+    ViewBag.Titulo = "Adicionar Item";
 }
+
+<div class="content-panel p-4">
+    <h2 class="h4 mb-1">@dados.NomeListaCompra</h2>
+    <p class="text-secondary mb-4">Selecione um produto e informe a quantidade.</p>
+
+    <form asp-action="Cadastrar" method="post">
+        <input asp-for="ListaCompraId" type="hidden" />
+
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger mb-3"></div>
+
+        <div class="mb-3">
+            <label asp-for="ProdutoId" class="form-label">Produto</label>
+            <select asp-for="ProdutoId" class="form-select">
+                <option value="">Selecione um produto</option>
+
+                @foreach (OpcaoProdutoViewModel produto in dados.Produtos)
+                {
+                    <option value="@produto.Id">
+                        @produto.Nome - @produto.NomeCategoria - @produto.PrecoAproximado.ToString("C")
+                    </option>
+                }
+            </select>
+            <span asp-validation-for="ProdutoId" class="text-danger small"></span>
+        </div>
+
+        <div class="mb-4">
+            <label asp-for="Quantidade" class="form-label">Quantidade</label>
+            <input asp-for="Quantidade" class="form-control" type="number" min="0.01" step="0.01" />
+            <span asp-validation-for="Quantidade" class="text-danger small"></span>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+                Adicionar item
+            </button>
+
+            <a class="btn btn-outline-secondary" asp-action="Listar" asp-route-listaCompraId="@Model.ListaCompraId">
+                Voltar
+            </a>
+        </div>
+    </form>
+</div>

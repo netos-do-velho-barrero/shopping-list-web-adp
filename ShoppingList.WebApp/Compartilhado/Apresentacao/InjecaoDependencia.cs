@@ -1,7 +1,5 @@
-// using ListaDeComprasWeb.WebApp.ModuloCategoria.Apresentacao;
-// using ListaDeComprasWeb.WebApp.ModuloItemLista.Apresentacao;
+using ListaDeComprasWeb.WebApp.ModuloItemLista.Apresentacao;
 using ListaDeComprasWeb.WebApp.ModuloListaCompra.Apresentacao;
-// using ListaDeComprasWeb.WebApp.ModuloProduto.Apresentacao;
 
 namespace ListaDeComprasWeb.WebApp.Compartilhado.Apresentacao;
 
@@ -20,10 +18,8 @@ public static class InjecaoDependencia
 
         services.AddAutoMapper(config =>
         {
-            //     config.AddProfile<CategoriaProfile>();
-            //     config.AddProfile<ProdutoProfile>();
             config.AddProfile<ListaCompraProfile>();
-            //     config.AddProfile<ItemListaProfile>();
+            config.AddProfile<ItemListaProfile>();
         });
     }
 }

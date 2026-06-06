@@ -4,58 +4,108 @@
     ViewBag.Titulo = "Listas de Compras";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h3 class="mb-0">Listas cadastradas</h3>
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
+    <div>
+        <h1 class="h3 mb-1">Listas de Compras</h1>
+        <p class="text-secondary mb-0">
+            Gerencie suas listas, acompanhe os itens e veja o total estimado de cada compra.
+        </p>
+    </div>
 
     <a class="btn btn-primary" asp-action="Cadastrar">
         Nova lista
     </a>
 </div>
 
-@if (Model.Count == 0)
-{
-    <div class="alert alert-info">
-        Nenhuma lista de compras cadastrada.
+<div class="card border-0 shadow-sm">
+    <div class="card-body">
+        @if (Model.Count == 0)
+        {
+            <div class="text-center py-5">
+                <h2 class="h5 mb-2">Nenhuma lista cadastrada</h2>
+                <p class="text-secondary mb-4">
+                    Crie sua primeira lista de compras para começar.
+                </p>
+
+                <a class="btn btn-primary" asp-action="Cadastrar">
+                    Cadastrar lista
+                </a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nome</th>
+                            <th>Data de criação</th>
+                            <th>Status</th>
+                            <th class="text-center">Itens</th>
+                            <th>Total estimado</th>
+                            <th class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (ListarListasCompraViewModel lista in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="fw-semibold">@lista.Nome</div>
+                                    <small class="text-secondary">Código: @lista.Id</small>
+                                </td>
+
+                                <td>
+                                    @lista.DataCriacao.ToString("dd/MM/yyyy HH:mm")
+                                </td>
+
+                                <td>
+                                    @if (lista.Status == StatusListaCompra.Aberta)
+                                    {
+                                        <span class="badge text-bg-success">Aberta</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge text-bg-secondary">Concluída</span>
+                                    }
+                                </td>
+
+                                <td class="text-center">
+                                    <span class="badge rounded-pill text-bg-light border">
+                                        @lista.TotalItens
+                                    </span>
+                                </td>
+
+                                <td class="fw-semibold">
+                                    @lista.ValorTotalEstimado.ToString("C")
+                                </td>
+
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm" role="group">
+                                        <a class="btn btn-outline-success" asp-controller="ItemLista" asp-action="Listar"
+                                           asp-route-listaCompraId="@lista.Id">
+                                            Itens
+                                        </a>
+
+                                        <a class="btn btn-outline-secondary" asp-action="Detalhes" asp-route-id="@lista.Id">
+                                            Detalhes
+                                        </a>
+
+                                        <a class="btn btn-outline-primary" asp-action="Editar" asp-route-id="@lista.Id">
+                                            Editar
+                                        </a>
+
+                                        <a class="btn btn-outline-danger" asp-action="Excluir" asp-route-id="@lista.Id">
+                                            Excluir
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
     </div>
-}
-else
-{
-    <table class="table table-striped table-hover align-middle">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Data de criação</th>
-                <th>Status</th>
-                <th>Total de itens</th>
-                <th>Total estimado</th>
-                <th class="text-end">Ações</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @foreach (ListarListasCompraViewModel lista in Model)
-            {
-                <tr>
-                    <td>@lista.Nome</td>
-                    <td>@lista.DataCriacao.ToString("dd/MM/yyyy HH:mm")</td>
-                    <td>@lista.Status</td>
-                    <td>@lista.TotalItens</td>
-                    <td>@lista.ValorTotalEstimado.ToString("C")</td>
-                    <td class="text-end">
-                        <a class="btn btn-sm btn-outline-secondary" asp-action="Detalhes" asp-route-id="@lista.Id">
-                            Detalhes
-                        </a>
-
-                        <a class="btn btn-sm btn-outline-primary" asp-action="Editar" asp-route-id="@lista.Id">
-                            Editar
-                        </a>
-
-                        <a class="btn btn-sm btn-outline-danger" asp-action="Excluir" asp-route-id="@lista.Id">
-                            Excluir
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+</div>

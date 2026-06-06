@@ -1,40 +1,62 @@
 ﻿@model ExcluirListaCompraViewModel
 
 @{
-    ViewBag.Titulo = "Excluir Lista de Compras";
+    ViewBag.Titulo = "Excluir Lista";
 }
 
-<div class="alert alert-warning">
-    Tem certeza que deseja excluir esta lista de compras?
-</div>
-
-<dl class="row">
-    <dt class="col-sm-3">Nome</dt>
-    <dd class="col-sm-9">@Model.Nome</dd>
-
-    <dt class="col-sm-3">Data de criação</dt>
-    <dd class="col-sm-9">@Model.DataCriacao.ToString("dd/MM/yyyy HH:mm")</dd>
-
-    <dt class="col-sm-3">Status</dt>
-    <dd class="col-sm-9">@Model.Status</dd>
-
-    <dt class="col-sm-3">Total de itens</dt>
-    <dd class="col-sm-9">@Model.TotalItens</dd>
-
-    <dt class="col-sm-3">Total estimado</dt>
-    <dd class="col-sm-9">@Model.ValorTotalEstimado.ToString("C")</dd>
-</dl>
-
-<form asp-action="Excluir" method="post">
-    <input asp-for="Id" type="hidden" />
-
-    <div class="d-flex gap-2">
-        <button type="submit" class="btn btn-danger">
-            Confirmar exclusão
-        </button>
-
-        <a class="btn btn-outline-secondary" asp-action="Listar">
-            Cancelar
-        </a>
+<div class="content-panel p-4">
+    <div class="alert alert-warning">
+        Tem certeza que deseja excluir esta lista de compras?
     </div>
-</form>
+
+    <div class="row g-3 mb-4">
+        <div class="col-md-6">
+            <div class="border rounded p-3">
+                <span class="text-secondary small">Nome</span>
+                <div class="fw-semibold">@Model.Nome</div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="border rounded p-3">
+                <span class="text-secondary small">Status</span>
+                <div class="fw-semibold">@Model.Status</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="border rounded p-3">
+                <span class="text-secondary small">Data de criação</span>
+                <div class="fw-semibold">@Model.DataCriacao.ToString("dd/MM/yyyy HH:mm")</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="border rounded p-3">
+                <span class="text-secondary small">Total de itens</span>
+                <div class="fw-semibold">@Model.TotalItens</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="border rounded p-3">
+                <span class="text-secondary small">Total estimado</span>
+                <div class="fw-semibold">@Model.ValorTotalEstimado.ToString("C")</div>
+            </div>
+        </div>
+    </div>
+
+    <form asp-action="Excluir" method="post">
+        <input asp-for="Id" type="hidden" />
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-danger">
+                Confirmar exclusão
+            </button>
+
+            <a class="btn btn-outline-secondary" asp-action="Listar">
+                Cancelar
+            </a>
+        </div>
+    </form>
+</div>

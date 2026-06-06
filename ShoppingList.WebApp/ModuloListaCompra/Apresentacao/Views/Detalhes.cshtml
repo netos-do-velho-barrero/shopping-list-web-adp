@@ -1,36 +1,64 @@
 ﻿@model DetalhesListaCompraViewModel
 
 @{
-    ViewBag.Titulo = "Detalhes da Lista de Compras";
+    ViewBag.Titulo = "Detalhes da Lista";
 }
 
-<dl class="row">
-    <dt class="col-sm-3">Nome</dt>
-    <dd class="col-sm-9">@Model.Nome</dd>
+<div class="content-panel p-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between gap-3 mb-4">
+        <div>
+            <h2 class="h4 mb-1">@Model.Nome</h2>
+            <p class="text-secondary mb-0">Resumo da lista de compras.</p>
+        </div>
 
-    <dt class="col-sm-3">Data de criação</dt>
-    <dd class="col-sm-9">@Model.DataCriacao.ToString("dd/MM/yyyy HH:mm")</dd>
+        @if (Model.Status == StatusListaCompra.Aberta)
+        {
+            <span class="badge text-bg-success align-self-start">Aberta</span>
+        }
+        else
+        {
+            <span class="badge text-bg-secondary align-self-start">Concluída</span>
+        }
+    </div>
 
-    <dt class="col-sm-3">Status</dt>
-    <dd class="col-sm-9">@Model.Status</dd>
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="border rounded p-3 h-100">
+                <span class="text-secondary small">Data de criação</span>
+                <div class="fw-semibold">@Model.DataCriacao.ToString("dd/MM/yyyy HH:mm")</div>
+            </div>
+        </div>
 
-    <dt class="col-sm-3">Total de itens</dt>
-    <dd class="col-sm-9">@Model.TotalItens</dd>
+        <div class="col-md-4">
+            <div class="border rounded p-3 h-100">
+                <span class="text-secondary small">Total de itens</span>
+                <div class="fw-semibold">@Model.TotalItens</div>
+            </div>
+        </div>
 
-    <dt class="col-sm-3">Total estimado</dt>
-    <dd class="col-sm-9">@Model.ValorTotalEstimado.ToString("C")</dd>
-</dl>
+        <div class="col-md-4">
+            <div class="border rounded p-3 h-100">
+                <span class="text-secondary small">Total estimado</span>
+                <div class="fw-semibold">@Model.ValorTotalEstimado.ToString("C")</div>
+            </div>
+        </div>
+    </div>
 
-<div class="d-flex gap-2">
-    <a class="btn btn-outline-primary" asp-action="Editar" asp-route-id="@Model.Id">
-        Editar
-    </a>
+    <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-success" asp-controller="ItemLista" asp-action="Listar" asp-route-listaCompraId="@Model.Id">
+            Ver itens
+        </a>
 
-    <a class="btn btn-outline-danger" asp-action="Excluir" asp-route-id="@Model.Id">
-        Excluir
-    </a>
+        <a class="btn btn-outline-primary" asp-action="Editar" asp-route-id="@Model.Id">
+            Editar
+        </a>
 
-    <a class="btn btn-outline-secondary" asp-action="Listar">
-        Voltar
-    </a>
+        <a class="btn btn-outline-danger" asp-action="Excluir" asp-route-id="@Model.Id">
+            Excluir
+        </a>
+
+        <a class="btn btn-outline-secondary" asp-action="Listar">
+            Voltar
+        </a>
+    </div>
 </div>

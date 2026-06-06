@@ -1,12 +1,18 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using ListaDeComprasWeb.WebApp.ModuloCategoria.Dominio;
 using ListaDeComprasWeb.WebApp.ModuloItemLista.Dominio;
 using ListaDeComprasWeb.WebApp.ModuloListaCompra.Dominio;
+using ListaDeComprasWeb.WebApp.ModuloProduto.Dominio;
 
 namespace ListaDeComprasWeb.WebApp.Compartilhado.Infra.Arquivos;
 
 public sealed class ContextoJson
 {
+    public List<Categoria> Categorias { get; set; } = new List<Categoria>();
+
+    public List<Produto> Produtos { get; set; } = new List<Produto>();
+
     public List<ListaCompra> ListasCompra { get; set; } = new List<ListaCompra>();
 
     public List<ItemLista> ItensLista { get; set; } = new List<ItemLista>();
@@ -54,6 +60,8 @@ public sealed class ContextoJson
         if (contextoSalvo == null)
             return;
 
+        Categorias = contextoSalvo.Categorias;
+        Produtos = contextoSalvo.Produtos;
         ListasCompra = contextoSalvo.ListasCompra;
         ItensLista = contextoSalvo.ItensLista;
     }

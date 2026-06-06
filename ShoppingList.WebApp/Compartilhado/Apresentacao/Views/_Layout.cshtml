@@ -4,16 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Titulo - Lista de Compras</title>
+    <title>@(ViewBag.Titulo ?? "Lista de Compras") - Shopping List</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <nav class="navbar navbar-expand-lg bg-white border-bottom">
+<body class="bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container">
-            <a class="navbar-brand fw-semibold" asp-controller="Home" asp-action="Index">
-                Lista de Compras
+            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
+                Shopping List
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal">
@@ -22,43 +22,36 @@
 
             <div class="collapse navbar-collapse" id="menuPrincipal">
                 <div class="navbar-nav ms-auto">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Início</a><a class="nav-link"
-                                                                                          asp-controller="ListaCompra" asp-action="Listar">
-                    Listas de Compras
-                </a>
-                <a class="nav-link" asp-controller="Categoria" asp-action="Listar">Categorias</a>
-                <a class="nav-link" asp-controller="Produto" asp-action="Listar">Produtos</a>
-                <a class="nav-link" asp-controller="ListaCompra" asp-action="Listar">Listas de Compras</a>
+                    <a class="nav-link" asp-controller="Home" asp-action="Index">Início</a>
+                    <a class="nav-link" asp-controller="Categoria" asp-action="Listar">Categorias</a>
+                    <a class="nav-link" asp-controller="Produto" asp-action="Listar">Produtos</a>
+                    <a class="nav-link" asp-controller="ListaCompra" asp-action="Listar">Listas</a>
+                </div>
             </div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<header class="container py-4">
-    <h2>@ViewBag.Titulo</h2>
-</header>
+    <main class="container py-4">
+        @if (TempData["MensagemErro"] is string mensagemErro)
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                @mensagemErro
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
 
-<main class="container pb-5">
-    @if (TempData["MensagemErro"] is string mensagemErro)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            @mensagemErro
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
+        @if (TempData["MensagemSucesso"] is string mensagemSucesso)
+        {
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                @mensagemSucesso
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        }
 
-    @if (TempData["MensagemSucesso"] is string mensagemSucesso)
-    {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            @mensagemSucesso
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-    }
+        @RenderBody()
+    </main>
 
-    @RenderBody()
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
