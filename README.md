@@ -13,72 +13,168 @@
 
 ![alt text](image.png)
 
-# 📌 Sobre o Projeto
 
-O **Lista de Compras** foi desenvolvido para ajudar a Maria a organizar as compras da família semanalmente, evitando o esquecimento de itens essenciais ou a compra duplicada de produtos que já existem em estoque doméstico.
+## 👥 Desenvolvedores
 
----
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/pedrohenriquedsdev">
+        <img src="https://github.com/pedrohenriquedsdev.png" width="80px" style="border-radius: 50%"/><br/>
+        <sub><b>Pedro Henrique</b></sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="https://github.com/Marco-Oliver">
+        <img src="https://github.com/Marco-Oliver.png" width="80px" style="border-radius: 50%"/><br/>
+        <sub><b>Marco Oliver</b></sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
-### 🗂️ Módulo de Categorias
-> **Ações Suportadas:** `Cadastrar` | `Editar` | `Excluir` | `Visualizar`
+<br>
 
-| Parâmetro | Regra de Negócio |
-| :--- | :--- |
-| **Identificação** | Nome obrigatório, único e com limite máximo de 50 caracteres. |
-| **Customização** | Definição de Cor através de seleção de paleta ou código Hexadecimal. |
-| **Segurança** | Bloqueio automático de exclusão se houver produtos vinculados à categoria. |
+## 📋 Sobre o Projeto
 
----
+Maria faz as compras da família toda semana, mas sempre esquece algum item ou compra coisas que já tem em casa. Para resolver esse problema, foi criado o **Lista de Compras** — um sistema simples e organizado para cadastrar produtos, montar listas e registrar as compras realizadas.
+
+<br>
+
+## ✨ Funcionalidades
+
+### 🏷️ Módulo de Categorias
+- Cadastrar, editar, visualizar e excluir categorias
+- Cada categoria possui nome (único, até 50 caracteres) e cor personalizada
+- Não é possível excluir uma categoria que possui produtos vinculados
 
 ### 📦 Módulo de Produtos
-> **Ações Suportadas:** `Cadastrar` | `Editar` | `Excluir` | `Visualizar`
-
-| Parâmetro | Regra de Negócio |
-| :--- | :--- |
-| **Validação** | Nome obrigatório (2 a 100 caracteres) e combinação única de Nome + Categoria. |
-| **Vínculo** | Associação obrigatória a uma categoria previamente cadastrada. |
-| **Métricas** | Definição obrigatória da unidade de medida (kg, un, L, cx) e preço aproximado. |
-
----
+- Cadastrar, editar, visualizar e excluir produtos
+- Campos: nome, categoria, unidade de medida (kg, unidade, litro, caixa...) e preço aproximado
+- Não permite produtos com o mesmo nome dentro da mesma categoria
 
 ### 📝 Módulo de Listas de Compras
-> **Ações Suportadas:** `Criar` | `Editar` | `Excluir` | `Visualizar`
+- Criar, editar, visualizar e excluir listas
+- Cada lista possui nome, data de criação automática e status (Aberta / Concluída)
+- Exibe total de itens e valor estimado total por lista
+- Não é possível excluir uma lista que já possui itens
 
-| Parâmetro | Regra de Negócio |
-| :--- | :--- |
-| **Identificação** | Nome da lista obrigatório (3 a 100 caracteres) e data de criação automática. |
-| **Status** | Controle de ciclo de vida da lista de compras: `Aberta` \| `Concluída`. |
-| **Restrições** | Bloqueio de exclusão se houver itens vinculados; exibição de totalizadores. |
+### 🛍️ Módulo de Itens da Lista
+- Adicionar e remover produtos de uma lista
+- Exibe a categoria do produto ao selecioná-lo
+- Calcula automaticamente o valor total da lista (preço × quantidade)
+- Não permite adicionar o mesmo produto duas vezes na mesma lista
 
----
+<br>
 
-### 🍎 Módulo de Itens da Lista
-> **Ações Suportadas:** `Adicionar Item` | `Remover Item` | `Visualizar Itens`
+## 🚀 Como Executar o Projeto
 
-| Parâmetro | Regra de Negócio |
-| :--- | :--- |
-| **Vínculo** | Seleção obrigatória do produto com exibição visual de sua categoria. |
-| **Quantidade** | Definição de quantidade estritamente positiva (maior que zero). |
-| **Cálculos** | Impede produtos duplicados na mesma lista; calcula valor estimado total automaticamente. |
+### Pré-requisitos
 
----
+- [.NET 8 SDK](https://dotnet.microsoft.com/download)
+- [Visual Studio 2022](https://visualstudio.microsoft.com/) ou [VS Code](https://code.visualstudio.com/)
+- Git
 
-# 🧠 Conceitos Aplicados
+### Passo a passo
 
-| Conceito | Aplicação |
+```bash
+# 1. Clone o repositório
+git clone https://github.com/pedrohenriquedsdev/lista-de-compras.git
+
+# 2. Acesse a pasta do projeto
+cd lista-de-compras
+
+# 3. Restaure os pacotes
+dotnet restore
+
+# 4. Execute a aplicação
+dotnet run --project src/ListaDeCompras.Web
+```
+
+Acesse no navegador: `https://localhost:5001`
+
+> Os dados são persistidos em arquivo local — nenhuma configuração de banco de dados é necessária.
+
+<br>
+
+## 🎬 Demonstração
+
+> *(Adicione aqui um GIF ou vídeo demonstrando as principais telas do sistema)*
+
+<!-- Exemplo:
+![Demo da aplicação](docs/demo.gif)
+-->
+
+<br>
+
+## 🏗️ Arquitetura
+
+O projeto segue o padrão de **3 camadas** com ASP.NET MVC:
+
+```
+ListaDeCompras/
+├── src/
+│   ├── ListaDeCompras.Web/          # Camada de Apresentação (Controllers, Views, ViewModels)
+│   │   ├── Controllers/
+│   │   │   ├── Categorias/
+│   │   │   ├── Produtos/
+│   │   │   ├── Listas/
+│   │   │   └── Itens/
+│   │   └── Views/
+│   │       ├── Categorias/
+│   │       ├── Produtos/
+│   │       ├── Listas/
+│   │       └── Itens/
+│   ├── ListaDeCompras.Domain/        # Camada de Domínio (Entidades, Regras de Negócio)
+│   │   ├── Entities/
+│   │   └── Services/
+│   └── ListaDeCompras.Infrastructure/ # Camada de Infraestrutura (Persistência em Arquivo)
+│       └── Repositories/
+└── README.md
+```
+
+<br>
+
+## 🛠️ Tecnologias Utilizadas
+
+| Tecnologia | Uso |
 |---|---|
-| 🏗️ POO | Modelagem das entidades físicas e lógicas do sistema de compras |
-| 📐 Camadas | Separação estrita de responsabilidades (MVC) |
-| ⚙️ Regras | Validação robusta contra duplicidade de produtos e exclusões indevidas |
+| ASP.NET MVC (.NET 8) | Framework principal |
+| C# | Linguagem de programação |
+| Razor / TagHelpers | Renderização de views |
+| DataAnnotations | Validações de formulário |
+| AutoMapper | Mapeamento entre entidades e ViewModels |
+| Injeção de Dependência | Baixo acoplamento entre camadas |
+| Serialização em arquivo (JSON) | Persistência de dados |
+| Bootstrap | Estilização da interface |
 
-## 👨‍💻 Autores
+<br>
 
-<div align="center">
+## ✅ Boas Práticas Aplicadas
 
-Desenvolvido por **Alunos da Academia do Programador**.
+- Separação clara em **3 camadas** (Apresentação, Domínio, Infraestrutura)
+- **ViewModels** para comunicação com as Views; **Records** para DTOs imutáveis
+- **Services** concentrando as regras de negócio
+- **Extension Methods** para comportamentos reutilizáveis
+- **Delegates, métodos anônimos e Lambdas** para maior legibilidade
+- **TempData** para feedback entre requisições
+- **ModelState** para validação consistente dos formulários
+- Nomenclatura seguindo o padrão **PascalCase / camelCase**
+- Tratamento de exceções e validações robustos
 
-[![GitHub](https://img.shields.io/badge/GitHub-pedrohenriquedsdev-181717?style=for-the-badge&logo=github)](https://github.com/pedrohenriquedsdev)
+<br>
 
-[![GitHub](https://img.shields.io/badge/GitHub-Marco--Oliver-181717?style=for-the-badge&logo=github)](https://github.com/Marco-Oliver)
+## 📌 Regras de Negócio Principais
 
-</div>
+- Categorias com nomes duplicados não são permitidas
+- Produtos com o mesmo nome na mesma categoria não são permitidos
+- Uma categoria não pode ser excluída se tiver produtos vinculados
+- Uma lista não pode ser excluída se tiver itens vinculados
+- O mesmo produto não pode aparecer duas vezes na mesma lista
+- O valor total da lista é calculado automaticamente
+
+<br>
+
+## 📄 Licença
+
+Este projeto foi desenvolvido para fins educacionais na **Academia do Programador**.
