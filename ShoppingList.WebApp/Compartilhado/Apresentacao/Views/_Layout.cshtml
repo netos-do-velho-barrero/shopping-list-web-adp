@@ -4,54 +4,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@(ViewBag.Titulo ?? "Lista de Compras") - Shopping List</title>
+    <title>@(ViewBag.Titulo ?? "Painel") - Lista de Compras</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+
+    <style>
+            :root {
+                --bg-main: #f3f7fc;
+                --primary-blue: #1e3a8a;
+                --electric-blue: #2563eb;
+                --sky-blue: #38bdf8;
+                --text-dark: #0f172a;
+                --active-bg: #eff6ff;
+            }
+
+            body {
+                font-family: 'Plus Jakarta Sans', sans-serif;
+                font-size: 1.15rem;
+                background-color: var(--bg-main);
+                color: var(--text-dark);
+                background-image:
+                    radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.15), transparent 35%),
+                    radial-gradient(circle at 15% 75%, rgba(37, 99, 235, 0.08), transparent 30%);
+                background-attachment: fixed;
+                min-height: 100vh;
+            }
+
+            /* Linha azul adicionada diretamente no topo da Navbar */
+            .navbar-blur {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: blur(12px);
+                border-bottom: 1px solid rgba(30, 41, 59, 0.06);
+                border-top: 4px solid var(--electric-blue);
+            }
+
+            .logo-box {
+                font-weight: 800;
+                font-size: 1.6rem;
+                color: var(--primary-blue);
+                text-decoration: none;
+            }
+
+            .logo-emblem {
+                background: var(--sky-blue);
+                width: 40px;
+                height: 40px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+
+            .nav-link-custom {
+                color: #475569;
+                font-weight: 600;
+                font-size: 1.1rem;
+                padding: 0.5rem 1.2rem !important;
+                border-radius: 50px;
+                transition: all 0.2s ease;
+                text-decoration: none;
+            }
+
+            /* Estilo igual ao da imagem enviada */
+            .nav-link-custom.active {
+                color: var(--electric-blue);
+                background-color: var(--active-bg);
+            }
+
+            .nav-link-custom:hover:not(.active):not(.btn-primary) {
+                background: rgba(37, 99, 235, 0.04);
+            }
+
+            /* Sino animado */
+            .notification-bell {
+                position: relative;
+                color: #475569;
+                font-size: 1.3rem;
+                padding: 0.5rem;
+                cursor: pointer;
+                transition: color 0.2s;
+            }
+
+            .notification-bell:hover {
+                color: var(--electric-blue);
+            }
+
+            .notification-dot {
+                position: absolute;
+                top: 6px;
+                right: 8px;
+                width: 8px;
+                height: 8px;
+                background-color: #ef4444;
+                border-radius: 50%;
+                animation: pulse 2s infinite;
+            }
+
+            @@keyframes pulse {
+                0% {
+                    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+                }
+
+                70% {
+                    box-shadow: 0 0 0 6px rgba(239, 68, 68, 0);
+                }
+
+                100% {
+                    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0);
+                }
+            }
+
+            .fab-button {
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                width: 60px;
+                height: 60px;
+                border-radius: 50%;
+                background: var(--electric-blue);
+                color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.8rem;
+                box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+            }
+
+            .fab-button:hover {
+                transform: scale(1.1) rotate(90deg);
+                color: white;
+            }
+    </style>
 </head>
 
-<body class="bg-light">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-blur sticky-top py-2">
         <div class="container">
-            <a class="navbar-brand fw-bold" asp-controller="Home" asp-action="Index">
-                Shopping List
+            <a class="navbar-brand d-flex align-items-center gap-2 logo-box" asp-controller="Home" asp-action="Index">
+                <div class="logo-emblem"><i class="bi bi-cart-check-fill fs-5"></i></div>
+                <span>Lista de <span style="color: var(--sky-blue)">Compras</span></span>
             </a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal">
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="menuPrincipal">
-                <div class="navbar-nav ms-auto">
-                    <a class="nav-link" asp-controller="Home" asp-action="Index">Início</a>
-                    <a class="nav-link" asp-controller="Categoria" asp-action="Listar">Categorias</a>
-                    <a class="nav-link" asp-controller="Produto" asp-action="Listar">Produtos</a>
-                    <a class="nav-link" asp-controller="ListaCompra" asp-action="Listar">Listas</a>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <div class="navbar-nav ms-auto gap-3 align-items-center">
+                    <a class="nav-link-custom active" asp-controller="Home" asp-action="Index">Dashboard</a>
+                    <a class="nav-link-custom" asp-controller="Categoria" asp-action="Listar">Categorias</a>
+                    <a class="nav-link-custom" asp-controller="Produto" asp-action="Listar">Produtos</a>
+                    <a class="nav-link-custom btn-primary text-white px-4 ms-lg-2"
+                       style="background: var(--electric-blue);" asp-controller="ListaCompra"
+                       asp-action="Listar">Minhas Listas</a>
+
+                    <!-- Novo Elemento Interativo: Sino -->
+                    <div class="notification-bell ms-lg-2" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                         title="3 Alertas de Orçamento">
+                        <i class="bi bi-bell-fill"></i>
+                        <span class="notification-dot"></span>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
     <main class="container py-4">
-        @if (TempData["MensagemErro"] is string mensagemErro)
-        {
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                @mensagemErro
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        }
-
-        @if (TempData["MensagemSucesso"] is string mensagemSucesso)
-        {
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                @mensagemSucesso
-                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            </div>
-        }
-
         @RenderBody()
     </main>
 
+    <a href="#" class="fab-button" data-bs-toggle="tooltip" data-bs-placement="left" title="Criar Nova Lista">
+        <i class="bi bi-plus-lg"></i>
+    </a>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Inicializa as tooltips do Bootstrap
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+        })
+    </script>
 </body>
 
 </html>

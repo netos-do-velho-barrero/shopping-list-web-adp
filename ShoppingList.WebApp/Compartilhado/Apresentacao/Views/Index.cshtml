@@ -1,69 +1,176 @@
 ﻿@{
     Layout = "_Layout";
-    ViewBag.Titulo = "Página Inicial";
+    ViewBag.Titulo = "Painel Principal";
 }
 
-<div class="row g-4 align-items-stretch">
-    <div class="col-lg-7">
-        <div class="content-panel h-100 p-4 p-lg-5">
-            <span class="badge text-bg-primary mb-3">Organização de compras</span>
+<style>
+    /* Hero Banner Premium */
+    .hero-panel {
+        background: linear-gradient(135deg, #0f172a, #1e40af);
+        color: white;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(30, 58, 138, 0.12);
+    }
 
-            <h2 class="display-6 fw-semibold mb-3">
-                Controle suas listas, produtos e categorias em um só lugar.
-            </h2>
+    .hero-glow-circle {
+        position: absolute;
+        width: 350px;
+        height: 350px;
+        background: rgba(56, 189, 248, 0.25);
+        border-radius: 50%;
+        top: -80px;
+        right: -80px;
+        filter: blur(50px);
+    }
 
-            <p class="lead text-secondary mb-4">
-                Crie listas de compras, adicione itens, acompanhe quantidades e veja o total estimado de cada lista.
-            </p>
+    /* Cards Interativos */
+    .glass-metric-card {
+        background: var(--glass-card);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.6);
+        border-radius: 18px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.02);
+        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
 
-            <div class="d-flex flex-wrap gap-2">
-                <a class="btn btn-primary px-4" asp-controller="ListaCompra" asp-action="Listar">
-                    Abrir listas
-                </a>
+    .glass-metric-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 35px rgba(37, 99, 235, 0.08);
+        border-color: rgba(37, 99, 235, 0.25);
+    }
 
-                <a class="btn btn-outline-primary px-4" asp-controller="Categoria" asp-action="Listar">
-                    Categorias
-                </a>
+    /* Menu de Atalhos Lateral Avançado */
+    .shortcut-card-link {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.25rem;
+        background: #ffffff;
+        border: 1px solid rgba(30, 41, 59, 0.05);
+        border-radius: 14px;
+        margin-bottom: 1rem;
+        transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        text-decoration: none;
+        color: inherit;
+    }
 
-                <a class="btn btn-outline-primary px-4" asp-controller="Produto" asp-action="Listar">
-                    Produtos
-                </a>
-            </div>
-        </div>
-    </div>
+    .shortcut-card-link:hover {
+        background: linear-gradient(90deg, #ffffff, #f0f7ff);
+        border-color: var(--sky-blue);
+        transform: translateX(6px);
+    }
 
-    <div class="col-lg-5">
-        <div class="content-panel h-100 p-4">
-            <h3 class="h5 mb-3">Módulos</h3>
+    .blue-pill {
+        background: rgba(37, 99, 235, 0.08);
+        color: var(--electric-blue);
+        padding: 0.4rem 0.9rem;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.95rem;
+    }
+</style>
 
-            <div class="list-group list-group-flush">
-                <a class="list-group-item list-group-item-action px-0 d-flex justify-content-between align-items-center"
-                   asp-controller="Categoria" asp-action="Listar">
-                    <span>
-                        <strong>Categorias</strong>
-                        <span class="d-block text-secondary small">Agrupe produtos por tipo.</span>
-                    </span>
-                    <span class="badge text-bg-light border">Abrir</span>
-                </a>
+<div class="row g-3">
+    <div class="col-lg-8">
+        <div class="hero-panel p-4 p-md-5 mb-3 position-relative">
+            <div class="hero-glow-circle"></div>
+            <div style="position: relative; z-index: 2; max-width: 90%;">
+                <span class="badge bg-info bg-opacity-25 text-info mb-3 px-3 py-2 rounded-pill fw-bold fs-6">PORTAL DE
+                    CONTROLE</span>
+                    <h1 class="display-5 fw-extrabold mb-3" style="letter-spacing: -1.2px; font-weight: 800;">Gerencie seu
+                        ecossistema de compras.</h1>
+                        <p class="lead opacity-75 mb-4 text-light" style="font-size: 1.25rem;">Acompanhe preços, distribua
+                            categorias e monte orçamentos inteligentes em tempo real.</p>
 
-                <a class="list-group-item list-group-item-action px-0 d-flex justify-content-between align-items-center"
-                   asp-controller="Produto" asp-action="Listar">
-                    <span>
-                        <strong>Produtos</strong>
-                        <span class="d-block text-secondary small">Cadastre preços e unidades.</span>
-                    </span>
-                    <span class="badge text-bg-light border">Abrir</span>
-                </a>
+                            <div class="d-flex flex-wrap gap-3 align-items-center">
+                                <a class="btn btn-light btn-lg rounded-pill px-4 fw-bold text-primary shadow-sm"
+                                   asp-controller="ListaCompra" asp-action="Cadastrar">Nova Lista</a>
+                            </div>
 
-                <a class="list-group-item list-group-item-action px-0 d-flex justify-content-between align-items-center"
-                   asp-controller="ListaCompra" asp-action="Listar">
-                    <span>
-                        <strong>Listas</strong>
-                        <span class="d-block text-secondary small">Monte e acompanhe suas compras.</span>
-                    </span>
-                    <span class="badge text-bg-primary">Abrir</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+                            <div class="mt-4 bg-white bg-opacity-10 p-3 rounded-3 border border-white border-opacity-25">
+                                <div class="d-flex justify-content-between text-light mb-2" style="font-size: 0.95rem;">
+                                    <span>Orçamento Mensal Dinâmico (R$ 1.500)</span>
+                                    <span class="fw-bold">32% Utilizado</span>
+                                </div>
+                                <div class="progress" style="height: 10px; background-color: rgba(255,255,255,0.2);">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" role="progressbar"
+                                         style="width: 32%;" aria-valuenow="32" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="glass-metric-card p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div class="p-3 bg-primary bg-opacity-10 rounded-3 text-primary"><i
+                                        class="bi bi-graph-up-arrow fs-3"></i></div>
+                                        <span class="blue-pill">+14.2%</span>
+                                    </div>
+                                    <h5 class="fw-bold text-muted mb-1">Média de Despesa</h5>
+                                    <h2 class="fw-extrabold text-dark m-0">R$ 482,50</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="glass-metric-card p-4">
+                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                        <div class="p-3 bg-info bg-opacity-10 rounded-3 text-info"><i class="bi bi-layers fs-3"></i>
+                                        </div>
+                                        <span class="blue-pill" style="background: rgba(14,165,233,0.1); color: #0ea5e9;">Estável</span>
+                                    </div>
+                                    <h5 class="fw-bold text-muted mb-1">Produtos no Catálogo</h5>
+                                    <h2 class="fw-extrabold text-dark m-0">124 Itens</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="glass-metric-card p-4 h-100">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h4 class="fw-extrabold m-0 text-dark">Módulos de Acesso</h4>
+                                <i class="bi bi-grid fs-5 text-muted"></i>
+                            </div>
+
+                            <a asp-controller="Categoria" asp-action="Listar" class="shortcut-card-link shadow-sm">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="p-3 bg-primary bg-opacity-10 rounded-3 text-primary"><i
+                                        class="bi bi-tags-fill fs-3"></i></div>
+                                        <div>
+                                            <h5 class="fw-bold m-0 text-dark">Categorias estruturadas</h5>
+                                            <small class="text-muted" style="font-size: 0.95rem;">Ajustar divisões de gôndola</small>
+                                        </div>
+                                    </div>
+                                    <i class="bi bi-arrow-right-short text-muted fs-3"></i>
+                                </a>
+
+                                <a asp-controller="Produto" asp-action="Listar" class="shortcut-card-link shadow-sm">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="p-3 bg-success bg-opacity-10 rounded-3 text-success"><i
+                                            class="bi bi-box-seam-fill fs-3"></i></div>
+                                            <div>
+                                                <h5 class="fw-bold m-0 text-dark">Base de Produtos</h5>
+                                                <small class="text-muted" style="font-size: 0.95rem;">Cadastrar novos insumos</small>
+                                            </div>
+                                        </div>
+                                        <i class="bi bi-arrow-right-short text-muted fs-3"></i>
+                                    </a>
+
+                                    <a asp-controller="ListaCompra" asp-action="Listar" class="shortcut-card-link shadow-sm mb-0">
+                                        <div class="d-flex align-items-center gap-3">
+                                            <div class="p-3 bg-warning bg-opacity-10 rounded-3 text-warning"><i
+                                                class="bi bi-archive-fill fs-3"></i></div>
+                                                <div>
+                                                    <h5 class="fw-bold m-0 text-dark">Histórico de Listas</h5>
+                                                    <small class="text-muted" style="font-size: 0.95rem;">Rever auditorias passadas</small>
+                                                </div>
+                                            </div>
+                                            <i class="bi bi-arrow-right-short text-muted fs-3"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
