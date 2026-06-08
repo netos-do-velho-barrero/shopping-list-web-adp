@@ -1,8 +1,15 @@
 using System;
+using ListaDeComprasWeb.WebApp.Compartilhado.Infra.Arquivos;
+using ListaDeComprasWeb.WebApp.ModuloCategoria.Dominio;
 
 namespace ShoppingList.WebApp.ModuloCategoria.Infra;
 
-public class RepositorioCategoriaEmArquivo
+public class RepositorioCategoriaEmArquivo : RepositorioBaseEmArquivo<Categoria>, IRepositorioCategoria
 {
+  public RepositorioCategoriaEmArquivo(ContextoJson contexto) : base(contexto) { }
 
+    protected override List<Categoria> CarregarRegistros()
+    {
+        return contexto.Categorias;
+    }
 }
