@@ -5,6 +5,8 @@ using ListaDeComprasWeb.WebApp.ModuloListaCompra.Dominio;
 using ListaDeComprasWeb.WebApp.ModuloListaCompra.Infra;
 using ListaDeComprasWeb.WebApp.ModuloProduto.Dominio;
 using ListaDeComprasWeb.WebApp.ModuloProduto.Infra;
+using ListaDeComprasWeb.WebApp.ModuloCategoria.Dominio;
+using ShoppingList.WebApp.ModuloCategoria.Infra;
 
 namespace ListaDeComprasWeb.WebApp.Compartilhado.Infra;
 
@@ -24,5 +26,6 @@ public static class InjecaoDependencia
         services.AddScoped<IRepositorioListaCompra, RepositorioListaCompraEmArquivo>();
         services.AddScoped<IRepositorioItemLista, RepositorioItemListaEmArquivo>();
         services.AddScoped<IRepositorioProduto, RepositorioProdutoEmArquivo>();
+        services.AddScoped<IRepositorioCategoria, RepositorioCategoriaEmArquivo>();
     }
 }

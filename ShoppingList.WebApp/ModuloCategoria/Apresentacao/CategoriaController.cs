@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using FluentResults;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using ShoppingList.WebApp.ModuloCategoria.Aplicacao;
 using ListaDeComprasWeb.WebApp.Compartilhado.Apresentacao.Extensions;
 using ListaDeComprasWeb.WebApp.ModuloCategoria.Dominio;

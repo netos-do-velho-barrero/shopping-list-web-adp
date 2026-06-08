@@ -3,6 +3,7 @@ using ListaDeComprasWeb.WebApp.ModuloCategoria.Dominio;
 
 namespace ShoppingList.WebApp.ModuloCategoria.Aplicacao;
 
+
 public record ListarCategoriaDto(
     string Id,
     string Nome,
@@ -10,7 +11,6 @@ public record ListarCategoriaDto(
 );
 
 public record CadastrarCategoriaDto(
-    string Id,
     string Nome,
     CorCategoria Cor
 );
