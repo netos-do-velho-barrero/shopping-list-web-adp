@@ -1,6 +1,7 @@
 using ListaDeComprasWeb.WebApp.ModuloItemLista.Apresentacao;
 using ListaDeComprasWeb.WebApp.ModuloListaCompra.Apresentacao;
 using ShoppingList.WebApp.ModuloCategoria.Apresentacao;
+using ShoppingList.WebApp.ModuloProduto.Apresentacao;
 
 namespace ListaDeComprasWeb.WebApp.Compartilhado.Apresentacao;
 
@@ -22,6 +23,8 @@ public static class InjecaoDependencia
             config.AddProfile<ListaCompraProfile>();
             config.AddProfile<ItemListaProfile>();
             config.AddProfile<CategoriaProfile>();
+            config.AddProfile<ProdutoProfile>();
+
         });
     }
 }
